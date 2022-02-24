@@ -11,4 +11,3 @@ rootProject.name = "nearby-share"
 include ':app'
 include ':share_export'
 include ':share_module'
-includeBuild("../VersionPlugin")
