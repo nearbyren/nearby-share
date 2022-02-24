@@ -9,7 +9,7 @@ afterEvaluate {
             release(MavenPublication) {
                 from components.release
                 groupId = 'ren.nearby.share_module'
-                artifactId = 'common'
+                artifactId = 'share'
                 version = '1.0.0'
             }
         }
