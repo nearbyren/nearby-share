@@ -1,7 +1,9 @@
 package ren.nearby.share_module
 
 import android.content.Context
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.orhanobut.logger.Logger
+import ren.nearby.share_export.router.ShareRouterTable
 import ren.nearby.share_export.service.IShareService
 
 /**
@@ -9,6 +11,7 @@ import ren.nearby.share_export.service.IShareService
  * @created on: 2022/2/24 14:19
  * @description:
  */
+@Route(path = ShareRouterTable.path_service)
 class ShareServiceImpl : IShareService() {
 
     override fun shareBoolean(): Boolean {
