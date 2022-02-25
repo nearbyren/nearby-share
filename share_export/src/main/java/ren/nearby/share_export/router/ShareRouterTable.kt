@@ -6,5 +6,8 @@ package ren.nearby.share_export.router
  * @description:
  */
 object ShareRouterTable {
-    const val path_page_share_wx = "/share/wx"
+
+    const val PATH_SHARE_WX = "/share/wx"
+
+    const val PATH_SERVICE = "/share/Service"
 }
