@@ -3,26 +3,13 @@ plugins {
     id 'kotlin-android'
     id 'maven-publish'
 }
-afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
-                from components.release
-                groupId = 'ren.nearby.share_module'
-                artifactId = 'share'
-                version = '1.0.0'
-            }
-        }
-    }
-}
+
 android {
     compileSdk 32
 
     defaultConfig {
         minSdk 21
         targetSdk 32
-        versionCode 1
-        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -35,11 +22,12 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
+
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = JavaVersion.VERSION_11.toString()
     }
 }
 
@@ -52,5 +40,32 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation 'com.github.nearbyren:nearby-common:1.0.1'
-    implementation project(path: ':share_export')
+    //注意这里只依赖share_export（share_module由壳工程引入）
+
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+
+            // Creates a Maven publication called "release".
+            release(MavenPublication) {
+
+                // Applies the component for the release build variant.
+                from components.release
+
+                // Library Package Name (Example : "com.frogobox.androidfirstlib")
+                // NOTE : Different GroupId For Each Library / Module, So That Each Library Is Not Overwritten
+                groupId = 'ren.nearby.share_module'
+
+                // Library Name / Module Name (Example : "androidfirstlib")
+                // NOTE : Different ArtifactId For Each Library / Module, So That Each Library Is Not Overwritten
+                artifactId = 'share_module'
+
+                // Version Library Name (Example : "1.0.0")
+                version = '1.0.0'
+
+            }
+        }
+    }
 }
