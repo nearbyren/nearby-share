@@ -10,7 +10,7 @@ import ren.nearby.share_export.service.IShareService
  * @created on: 2022/2/24 14:13
  * @description:
  */
-class ShareServiceUtil {
+open class ShareServiceUtil {
 
     companion object {
         fun navigateShareWx() {
