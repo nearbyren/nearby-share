@@ -13,6 +13,15 @@ import ren.nearby.share_export.service.IShareService
 open class ShareServiceUtil {
 
     companion object {
+
+
+        fun startRecommendPage() {
+            ARouter.getInstance().build(ShareRouterTable.PATH_RECOMMEND)
+                    .withString("key1", "哈哈1")
+                    .withString("key2", "哈哈2").navigation()
+        }
+
+
         fun navigateShareWx() {
             Logger.d("share share_export navigateShareWx")
         }
@@ -30,7 +39,7 @@ open class ShareServiceUtil {
 
             Logger.d("share share_export shareWxResult")
 
-            return true
+            return getService()!!.shareBoolean()
         }
     }
 }

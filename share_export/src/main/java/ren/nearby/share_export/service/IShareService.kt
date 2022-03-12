@@ -9,14 +9,9 @@ import com.orhanobut.logger.Logger
  * @created on: 2022/2/24 14:12
  * @description:
  */
-open class IShareService : IProvider {
+interface IShareService : IProvider {
 
-    open fun shareBoolean(): Boolean {
-        Logger.d("share share_export shareBoolean")
-        return true
-    }
+    open fun shareBoolean(): Boolean
 
-    override fun init(context: Context?) {
-        Logger.d("share share_export init")
-    }
+    override fun init(context: Context?)
 }
