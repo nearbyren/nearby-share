@@ -1,3 +1,5 @@
+import nearby.composing.builds.ThirdLib
+
 plugins {
     id 'com.android.application'
     id 'kotlin-android'

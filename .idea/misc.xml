@@ -3,8 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/project/AComponents/nearby-share/share_module/src/main/res/layout/home_activity_main.xml" value="0.30842391304347827" />
-        <entry key="..\:/project/AComponents/nearby-share/share_module/src/main/res/layout/share_start_activity.xml" value="0.28532608695652173" />
+        <entry key="share_module/src/main/res/layout/share_recommend_activity.xml" value="0.346875" />
       </map>
     </option>
   </component>

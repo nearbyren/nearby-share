@@ -1,8 +1,8 @@
 package ren.nearby.share_module
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.orhanobut.logger.Logger
 import kotlinx.android.synthetic.main.share_start_activity.*
 import ren.nearby.share_export.ShareServiceUtil
 
@@ -17,8 +17,10 @@ class StartUiAct : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.share_start_activity)
         share_button1.setOnClickListener {
-            Log.d("share", "Share flag = ${ShareServiceUtil.getService()!!.shareBoolean()}")
-
+            val flag = ShareServiceUtil.getService()?.apply {
+                shareBoolean()
+            } ?: false
+            Logger.d("share", "Share flag = ${flag}")
         }
         share_button2.setOnClickListener {
             ShareServiceUtil.startRecommendPage()

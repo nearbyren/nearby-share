@@ -24,6 +24,7 @@ open class ShareServiceUtil {
 
         fun navigateShareWx() {
             Logger.d("share share_export navigateShareWx")
+
         }
 
         fun getService(): IShareService? {

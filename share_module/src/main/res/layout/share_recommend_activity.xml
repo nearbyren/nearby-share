@@ -9,10 +9,26 @@
     <Button
         android:id="@+id/share_btn"
         android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:text="share" />
+
+    <Button
+        android:id="@+id/share_btn2"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="share"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@id/share_btn"
+        app:layout_constraintLeft_toRightOf="@id/share_btn"
+        app:layout_constraintTop_toTopOf="@id/share_btn" />
+
+    <Button
+        android:id="@+id/share_btn4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="share"
+        app:layout_constraintBottom_toBottomOf="@id/share_btn"
+        app:layout_constraintLeft_toRightOf="@id/share_btn2"
+        app:layout_constraintTop_toTopOf="@id/share_btn" />
 
     <TextView
         android:id="@+id/share_tv"
