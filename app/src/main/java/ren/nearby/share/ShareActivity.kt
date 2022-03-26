@@ -1,8 +1,8 @@
 package ren.nearby.share
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import ren.nearby.share_module.StartUiAct
 
 class ShareActivity : AppCompatActivity() {

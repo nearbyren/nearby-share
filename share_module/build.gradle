@@ -1,9 +1,18 @@
+import nearby.composing.builds.ThirdLib
+
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
     id 'maven-publish'
     id 'kotlin-android-extensions'
 //    id 'kotlin-parcelize'
+    id 'kotlin-kapt'
+
+}
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
 }
 
 android {
@@ -15,15 +24,6 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
-
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments = [AROUTER_MODULE_NAME: project.getName()]
-            }
-        }
-        ndk {
-            abiFilters "armeabi-v7a"
-        }
     }
     sourceSets {
         main {
@@ -57,6 +57,7 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    implementation 'com.github.nearbyren:nearby-common:1.0.2'
     implementation 'com.github.nearbyren:nearby-common:1.0.1'
 //    # required, enough for most devices.
     //ijkplayer
@@ -75,6 +76,8 @@ dependencies {
 
     //注意这里只依赖share_export（share_module由壳工程引入）
     implementation project(path: ':share_export')
+    implementation ThirdLib.arouter.arouter_api
+    kapt ThirdLib.arouter.arouter_compiler
 }
 
 afterEvaluate {
