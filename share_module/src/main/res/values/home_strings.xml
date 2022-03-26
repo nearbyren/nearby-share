@@ -1,3 +1,8 @@
 <resources>
     <string name="share_app_name">share</string>
+    <!--video-->
+    <string name="share_video_error_title">不能播放视频</string>
+    <string name="share_video_error_text_invalid_progressive_playback">对不起，这个视频不适合该装置的流</string>
+    <string name="share_video_error_text_unknown">该视频不能播放</string>
+    <string name="share_video_error_button">OK</string>
 </resources>

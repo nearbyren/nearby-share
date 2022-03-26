@@ -1,10 +1,12 @@
 package ren.nearby.share_module
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.share_start_activity.*
 import ren.nearby.share_export.ShareServiceUtil
+import ren.nearby.share_module.course.VideoPlayerActivity
 
 
 /**
@@ -21,7 +23,8 @@ class StartUiAct : AppCompatActivity() {
 
         }
         share_button2.setOnClickListener {
-            ShareServiceUtil.startRecommendPage()
+//            ShareServiceUtil.startRecommendPage()
+            startActivity(Intent(ShareActivity@ this, VideoPlayerActivity::class.java))
         }
     }
 }
