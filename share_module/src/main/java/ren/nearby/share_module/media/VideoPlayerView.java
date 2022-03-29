@@ -16,6 +16,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
+import com.orhanobut.logger.Logger;
+
 import java.io.IOException;
 
 import ren.nearby.share_module.R;
@@ -132,7 +134,7 @@ public class VideoPlayerView extends SurfaceView implements MediaPlayerListener 
         public void onVideoSizeChanged(IMediaPlayer mp, int width, int height,
                                        int sarNum, int sarDen) {
 
-            DebugLog.dfmt(TAG, "onVideoSizeChanged: (%dx%d)", width, height);
+            Logger.d( "Media - > onVideoSizeChanged: (%dx%d)", width, height);
             mVideoWidth = mp.getVideoWidth();
             mVideoHeight = mp.getVideoHeight();
             mVideoSarNum = sarNum;
@@ -148,7 +150,7 @@ public class VideoPlayerView extends SurfaceView implements MediaPlayerListener 
         @Override
         public void onPrepared(IMediaPlayer mp) {
 
-            DebugLog.d(TAG, "onPrepared");
+            Logger.d(  "Media - > onPrepared");
             mCurrentState = STATE_PREPARED;
             mTargetState = STATE_PLAYING;
 
@@ -192,7 +194,7 @@ public class VideoPlayerView extends SurfaceView implements MediaPlayerListener 
         @Override
         public void onCompletion(IMediaPlayer mp) {
 
-            DebugLog.d(TAG, "onCompletion");
+            Logger.d( "Media - > onCompletion");
             mCurrentState = STATE_PLAYBACK_COMPLETED;
             mTargetState = STATE_PLAYBACK_COMPLETED;
             if (mMediaController != null) {
@@ -209,7 +211,7 @@ public class VideoPlayerView extends SurfaceView implements MediaPlayerListener 
         @Override
         public boolean onError(IMediaPlayer mp, int framework_err, int impl_err) {
 
-            DebugLog.dfmt(TAG, "Error: %d, %d", framework_err, impl_err);
+            Logger.d( "Media - > Error: %d, %d", framework_err, impl_err);
             mCurrentState = STATE_ERROR;
             mTargetState = STATE_ERROR;
             if (mMediaController != null) {
@@ -261,17 +263,17 @@ public class VideoPlayerView extends SurfaceView implements MediaPlayerListener 
         @Override
         public boolean onInfo(IMediaPlayer mp, int what, int extra) {
 
-            DebugLog.dfmt(TAG, "onInfo: (%d, %d)", what, extra);
+            Logger.d( "Media - > onInfo: (%d, %d)", what, extra);
             if (mOnInfoListener != null) {
                 mOnInfoListener.onInfo(mp, what, extra);
             } else if (mMediaPlayer != null) {
                 if (what == IMediaPlayer.MEDIA_INFO_BUFFERING_START) {
-                    DebugLog.dfmt(TAG, "onInfo: (MEDIA_INFO_BUFFERING_START)");
+                    Logger.d( "Media - > onInfo: (MEDIA_INFO_BUFFERING_START)");
                     if (mMediaBufferingIndicator != null) {
                         mMediaBufferingIndicator.setVisibility(View.VISIBLE);
                     }
                 } else if (what == IMediaPlayer.MEDIA_INFO_BUFFERING_END) {
-                    DebugLog.dfmt(TAG, "onInfo: (MEDIA_INFO_BUFFERING_END)");
+                    Logger.d( "Media - > onInfo: (MEDIA_INFO_BUFFERING_END)");
                     if (mMediaBufferingIndicator != null) {
                         mMediaBufferingIndicator.setVisibility(View.GONE);
                     }
@@ -286,7 +288,7 @@ public class VideoPlayerView extends SurfaceView implements MediaPlayerListener 
         @Override
         public void onSeekComplete(IMediaPlayer mp) {
 
-            DebugLog.d(TAG, "onSeekComplete");
+            Logger.d( "Media - > onSeekComplete");
             if (mOnSeekCompleteListener != null) {
                 mOnSeekCompleteListener.onSeekComplete(mp);
             }
@@ -406,9 +408,7 @@ public class VideoPlayerView extends SurfaceView implements MediaPlayerListener 
             }
             setLayoutParams(lp);
             getHolder().setFixedSize(mSurfaceWidth, mSurfaceHeight);
-            DebugLog.dfmt(
-                    TAG,
-                    "VIDEO: %dx%dx%f[SAR:%d:%d], Surface: %dx%d, LP: %dx%d, Window: %dx%dx%f",
+            Logger.d( "Media - > VIDEO: %dx%dx%f[SAR:%d:%d], Surface: %dx%d, LP: %dx%d, Window: %dx%dx%f",
                     mVideoWidth, mVideoHeight, videoRatio, mVideoSarNum,
                     mVideoSarDen, mSurfaceWidth, mSurfaceHeight, lp.width,
                     lp.height, windowWidth, windowHeight, windowRatio);
@@ -521,7 +521,7 @@ public class VideoPlayerView extends SurfaceView implements MediaPlayerListener 
             mCurrentState = STATE_PREPARING;
             attachMediaController();
         } catch (IOException | IllegalArgumentException ex) {
-            DebugLog.e(TAG, "Unable to open content: " + mUri, ex);
+            Logger.d( "Media - > Unable to open content: " + mUri, ex);
             mCurrentState = STATE_ERROR;
             mTargetState = STATE_ERROR;
             mErrorListener.onError(mMediaPlayer,
