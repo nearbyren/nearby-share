@@ -20,4 +20,12 @@
         android:text="recommend"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/share_button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="share_button3"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/share_button1" />
 </androidx.constraintlayout.widget.ConstraintLayout>

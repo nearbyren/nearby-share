@@ -1,6 +1,8 @@
 package ren.nearby.share
 
 import android.app.Application
+import android.content.Context
+import android.content.Intent
 import android.content.res.Configuration
 import com.alibaba.android.arouter.launcher.ARouter
 import com.orhanobut.logger.AndroidLogAdapter
@@ -14,6 +16,16 @@ import com.sankuai.erp.component.appinit.common.ChildInitTable
 import com.sankuai.erp.component.appinit.api.AppInitApiUtils
 import timber.log.Timber
 import timber.log.Timber.DebugTree
+import com.fanjun.keeplive.config.KeepLiveService
+
+import com.fanjun.keeplive.KeepLive
+
+import com.fanjun.keeplive.config.ForegroundNotificationClickListener
+
+import com.fanjun.keeplive.config.ForegroundNotification
+
+
+
 
 
 /**
@@ -68,6 +80,36 @@ class ShareApplication : Application() {
             }
 
         })
+        val foregroundNotification =
+            ForegroundNotification("测试", "描述", R.mipmap.ic_launcher,  //定义前台服务的通知点击事件
+                object : ForegroundNotificationClickListener {
+                    override fun foregroundNotificationClick(context: Context?, intent: Intent?) {
+                        Logger.d("KeepLive - > foregroundNotificationClick")
+                    }
+                })
+        //启动保活服务
+        //启动保活服务
+        KeepLive.startWork(this, KeepLive.RunMode.ENERGY, foregroundNotification,  //你需要保活的服务，如socket连接、定时任务等，建议不用匿名内部类的方式在这里写
+            object : KeepLiveService{
+                /**
+                 * 运行中
+                 * 由于服务可能会多次自动启动，该方法可能重复调用
+                 */
+                override fun onWorking() {
+                    Logger.d("KeepLive - > onWorking")
+                }
+                /**
+                 * 服务终止
+                 * 由于服务可能会被多次终止，该方法可能重复调用，需同onWorking配套使用，如注册和注销broadcast
+                 */
+                override fun onStop() {
+                    Logger.d("KeepLive - > onStop")
+                }
+
+
+
+            }
+        )
     }
     override fun onTerminate() {
         super.onTerminate()
