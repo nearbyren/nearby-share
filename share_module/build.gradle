@@ -76,7 +76,7 @@ dependencies {
 
     //注意这里只依赖share_export（share_module由壳工程引入）
     implementation project(path: ':share_export')
-    api project(path: ':keeplive')
+//    api project(path: ':keeplive')
     implementation ThirdLib.arouter.arouter_api
     kapt ThirdLib.arouter.arouter_compiler
 }

@@ -111,6 +111,95 @@ android {
 }
 ```
 
+# maven构建方式
+
+```
+    //task sourceJar(type: Jar) {
+//    from android.sourceSets.main.java.getSrcDirs() // 源码路径
+//    archiveClassifier = "sources"
+//}
+
+// components.release 只有在配置完成之后，才能拿到值
+afterEvaluate {
+    publishing {
+        repositories { RepositoryHandler handler ->
+            handler.mavenLocal()
+            handler.maven {
+                url "${rootDir}/repo"
+            }
+            // 仓库用户名密码
+            // handler.maven { MavenArtifactRepository mavenArtifactRepository ->
+            //     // maven 仓库地址
+            //     url 'http://xx.xxx.xx.xx:8081/repository/core/'
+            //     // 访问仓库的 账号和密码
+            //     credentials {
+            //         username = "lr"
+            //         password = "123456"
+            //     }
+            // }
+        }
+        publications { PublicationContainer publicationContainer ->
+            // Creates a Maven publication called "release".
+            release(MavenPublication) {
+                // Applies the component for the release build variant.
+                from components.release // 注释1:使用 Android Gradle 插件生成的组件，作为发布的内容
+//                artifact sourceJar // 上传源码
+                // Library Package Name (Example : "com.frogobox.androidfirstlib")
+                // NOTE : Different GroupId For Each Library / Module, So That Each Library Is Not Overwritten
+                groupId = 'ren.nearby.share_export'
+                // Library Name / Module Name (Example : "androidfirstlib")
+                // NOTE : Different ArtifactId For Each Library / Module, So That Each Library Is Not Overwritten
+                artifactId = 'share-export'
+                // Version Library Name (Example : "1.0.0")
+                version = '1.0.0'
+
+                //指定路径 share_export-release.aar
+//                artifact "build/outputs/aar/${project.getName()}-release.aar"
+            }
+        }
+    }
+}
+```
+
+```
+之前版本设置aar路径
+
+Gradle 7.0+ 设置aar路径
+
+方式一
+        移除 repositories { flatDir { dirs 'libs' } }
+
+        移除 implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+        implementation files('libs/AarLib_V1.0.0.aar')
+
+方式二
+//    implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
+//    implementation fileTree(include: ['*.jar', "*.aar"], dir: 'libs/aars')
+
+
+之前版本设置aar路径
+
+方式一
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation(name: 'AarLib_V1.0.0', ext: 'aar')
+
+方式二
+
+    implementation fileTree(dir: "libs", include: [".jar", ".aar"])
+
+```
+
+
+
+
+
 
 
 

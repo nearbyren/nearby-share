@@ -1,4 +1,3 @@
-import nearby.composing.builds.*
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
@@ -44,28 +43,47 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation 'com.github.nearbyren:nearby-common:1.0.2'
 }
+//task sourceJar(type: Jar) {
+//    from android.sourceSets.main.java.getSrcDirs() // 源码路径
+//    archiveClassifier = "sources"
+//}
 
+// components.release 只有在配置完成之后，才能拿到值
 afterEvaluate {
     publishing {
-        publications {
-
+        repositories { RepositoryHandler handler ->
+            handler.mavenLocal()
+            handler.maven {
+                url "${rootDir}/repo"
+            }
+            // 仓库用户名密码
+            // handler.maven { MavenArtifactRepository mavenArtifactRepository ->
+            //     // maven 仓库地址
+            //     url 'http://xx.xxx.xx.xx:8081/repository/core/'
+            //     // 访问仓库的 账号和密码
+            //     credentials {
+            //         username = "lr"
+            //         password = "123456"
+            //     }
+            // }
+        }
+        publications { PublicationContainer publicationContainer ->
             // Creates a Maven publication called "release".
             release(MavenPublication) {
-
                 // Applies the component for the release build variant.
-                from components.release
-
+                from components.release // 注释1:使用 Android Gradle 插件生成的组件，作为发布的内容
+//                artifact sourceJar // 上传源码
                 // Library Package Name (Example : "com.frogobox.androidfirstlib")
                 // NOTE : Different GroupId For Each Library / Module, So That Each Library Is Not Overwritten
                 groupId = 'ren.nearby.share_export'
-
                 // Library Name / Module Name (Example : "androidfirstlib")
                 // NOTE : Different ArtifactId For Each Library / Module, So That Each Library Is Not Overwritten
-                artifactId = 'share_export'
-
+                artifactId = 'share-export'
                 // Version Library Name (Example : "1.0.0")
                 version = '1.0.0'
 
+                //指定路径 share_export-release.aar
+//                artifact "build/outputs/aar/${project.getName()}-release.aar"
             }
         }
     }
