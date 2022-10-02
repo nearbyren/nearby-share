@@ -1,0 +1,12 @@
+{
+  "//useModuleAll": "true-全部使用本地依赖 false-根据useModule决定依赖",
+  "//useModule": "true-当前组件使用本地依赖 false-当前组件使用远程aar依赖",
+  "//module_name": "本地组件名称",
+  "//module_dir": "本地组件路径",
+  "//module_group": "远程aar依赖路径",
+
+  "useModuleAll": false,
+  "list": [
+
+  ]
+}

@@ -3,7 +3,6 @@ package ren.nearby.share_module
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.fanjun.keeplive.activity.OnePixelActivity
 import com.orhanobut.logger.Logger
 import kotlinx.android.synthetic.main.share_start_activity.*
 import ren.nearby.share_export.ShareServiceUtil
@@ -30,7 +29,7 @@ class StartUiAct : AppCompatActivity() {
             startActivity(Intent(ShareActivity@ this, VideoPlayerActivity::class.java))
         }
         share_button3.setOnClickListener {
-            startActivity(Intent(ShareActivity@ this, OnePixelActivity::class.java))
+//            startActivity(Intent(ShareActivity@ this, OnePixelActivity::class.java))
         }
     }
 }
