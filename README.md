@@ -302,7 +302,14 @@ apply from: 'module_dependency.gradle'
 e.printStackTrace()
 }
 
-
+## 5.在settings.gradle配置 拉取远程aar
+maven {
+    url  = uri("https://maven.pkg.github.com/nearbyren/nearby-share")
+    credentials {
+        username = "nearbyren"
+        password = "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"
+    }
+}
 
 
 # 'maven-publish' GitHubPackages 构建 远程aar maven 仓库步骤
