@@ -45,7 +45,7 @@ afterEvaluate {
                 // NOTE : Different ArtifactId For Each Library / Module, So That Each Library Is Not Overwritten
                 artifactId = 'share-export'
                 // Version Library Name (Example : "1.0.0")
-                version = '1.0.0'
+                version = '1.0.2'
 
                 //指定路径 share_export-release.aar
 //                artifact "build/outputs/aar/${project.getName()}-release.aar"

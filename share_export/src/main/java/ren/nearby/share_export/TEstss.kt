@@ -18,4 +18,11 @@ object TEstss {
     fun t6() {
 
     }
+    fun t7() {
+
+    }
+    fun t8() {
+
+    }
+
 }
