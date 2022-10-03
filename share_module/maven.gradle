@@ -12,6 +12,7 @@ afterEvaluate {
         repositories { RepositoryHandler handler ->
 
             if (!isRemoteAar.toBoolean()) {
+                //执行命令 右侧 gradle -> xxx-xxx[common-module] -> Tasks -> publishing -> publish
                 // 指定路径的本地仓库
                 handler.mavenLocal()
                 handler.maven {
